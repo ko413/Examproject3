@@ -9,10 +9,9 @@ public class SuperHero extends Hero {
         super(name, hp, weapon);
     }
 
-    // 変身メッセージを返すメソッドを追加します
     public String transform() {
         this.setHp(this.getHp() - 30);
-        return this.getName() + "はスーパーヒーローになった！しかし力を解放した代償を受ける！";
+        return this.getName() + "はスーパーヒーローになった！<br>しかし力を解放した代償を受ける！";
     }
 
     @Override

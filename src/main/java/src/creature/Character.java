@@ -1,7 +1,6 @@
 package creature;
-
+// (以前お渡しした完成版コードと同じです)
 import weapon.Weapon;
-
 public abstract class Character implements Creature {
     private String name;
     private int hp;
@@ -12,52 +11,20 @@ public abstract class Character implements Creature {
         this.hp = hp;
         this.weapon = weapon;
     }
-
-    public String die() {
-        return "「" + this.getName() + "は死んでしまった！」";
-    }
-
+    public String die() { return "「" + this.getName() + "は死んでしまった！」"; }
     @Override
-    public final boolean isAlive() {
-        return this.hp > 0;
-    }
-
+    public final boolean isAlive() { return this.hp > 0; }
     @Override
-    public String showStatus() {
-        return this.getName() + " (HP: " + this.getHp() + ")";
-    }
-
+    public String showStatus() { return this.getName() + " (HP: " + this.getHp() + ")"; }
     @Override
     public abstract String attack(Creature target);
-
     @Override
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    public String getName() { return this.name; }
+    public void setName(String name) { this.name = name; }
     @Override
-    public int getHp() {
-        return this.hp;
-    }
-
+    public int getHp() { return this.hp; }
     @Override
-    public void setHp(int hp) {
-        if (hp < 0) {
-            this.hp = 0;
-        } else {
-            this.hp = hp;
-        }
-    }
-
-    public Weapon getWeapon() {
-        return this.weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
+    public void setHp(int hp) { this.hp = (hp < 0) ? 0 : hp; }
+    public Weapon getWeapon() { return this.weapon; }
+    public void setWeapon(Weapon weapon) { this.weapon = weapon; }
 }

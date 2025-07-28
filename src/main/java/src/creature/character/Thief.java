@@ -33,13 +33,11 @@ public class Thief extends Character {
     public void setHp(int hp) {
         if (this.guard) {
             this.guard = false;
-            // メッセージはサーブレット側で表示するため、ここでは何もしません
             return;
         }
         super.setHp(hp);
     }
 
-    // ガード状態か確認するメソッドを追加します
     public boolean isGuarding() {
         return this.guard;
     }

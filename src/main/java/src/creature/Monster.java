@@ -1,4 +1,4 @@
-package src.creature;
+package creature;
 
 public abstract class Monster implements Creature {
     private String name;
@@ -6,50 +6,52 @@ public abstract class Monster implements Creature {
     private char suffix;
 
     public Monster(String name, char suffix, int hp) {
-        if (hp < 0) {
-            throw new IllegalArgumentException("初期設定に誤りがあるため、キャラクターを生成できませんでした");
-        }
         this.name = name;
         this.suffix = suffix;
         this.hp = hp;
     }
 
-    public void run() {
-        System.out.println(this.name + this.suffix + "は逃げ出した！");
+    public String run() {
+        return "「" + this.getName() + "は逃げ出した」";
     }
-    public void die() {
-        System.out.println(this.name + this.suffix + "を倒した！");
+
+    public String die() {
+        return "「" + this.getName() + "を倒した！」";
     }
 
     @Override
+    public final boolean isAlive() {
+        return this.hp > 0;
+    }
+
+    @Override
+    public String showStatus() {
+        return this.getName() + " (HP: " + this.getHp() + ")";
+    }
+
+    @Override
+    public abstract String attack(Creature target);
+
+    @Override
     public String getName() {
-        return name;
+        return this.name + this.suffix;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public int getHp() {
-        return hp;
+        return this.hp;
     }
 
     @Override
     public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public char getSuffix() {
-        return suffix;
-    }
-
-    public void setSuffix(char suffix) {
-        this.suffix = suffix;
-    }
-    public final boolean isAlive() {
-        return this.hp > 0;
-    }
-    public void showStatus() {
-        System.out.println(this.getName() + this.getSuffix() + ":HP" + this.getHp());
+        if (hp < 0) {
+            this.hp = 0;
+        } else {
+            this.hp = hp;
+        }
     }
 }

@@ -9,13 +9,13 @@ public class Hero extends Character {
         super(name, hp, weapon);
     }
 
-    public void attack(Creature target) {
+    public String attack(Creature target) {
         int damage = this.getWeapon().getDamage();
-        System.out.println(this.getName() + "は" + this.getWeapon().getName() + this.getWeapon().attackMessage());
-        System.out.println(target.getName() + "に" + damage + "のダメージを与えた！");
         target.setHp(target.getHp() - damage);
-        if (target.getHp() < 0) {
-            target.setHp(0);
-        }
+        // 表示したいメッセージを一つのStringとして組み立てます
+        String message = this.getName() + "は" + this.getWeapon().getName() + this.getWeapon().attackMessage()
+                + "<br>" + target.getName() + "に" + damage + "のダメージを与えた！";
+        // 組み立てたメッセージを返します
+        return message;
     }
 }

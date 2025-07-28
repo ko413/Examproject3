@@ -1,44 +1,62 @@
-package src.creature;
+package creature;
 
 import weapon.Weapon;
+
 public abstract class Character implements Creature {
     private String name;
     private int hp;
     private Weapon weapon;
+
     public Character(String name, int hp, Weapon weapon) {
-        if (hp < 0) {
-            throw new IllegalArgumentException("初期設定に誤りがあるため、キャラクターを生成できませんでした");
-        }
         this.name = name;
         this.hp = hp;
         this.weapon = weapon;
     }
-    public void die() {
-        System.out.println(this.getName() + "は死んでしまった！");
+
+    public String die() {
+        return "「" + this.getName() + "は死んでしまった！」";
     }
+
+    @Override
     public final boolean isAlive() {
         return this.hp > 0;
     }
-    public void showStatus() {
-        System.out.println(getName() + ":" + "HP" + getHp());
+
+    @Override
+    public String showStatus() {
+        return this.getName() + " (HP: " + this.getHp() + ")";
     }
+
+    @Override
+    public abstract String attack(Creature target);
+
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
     public int getHp() {
-        return hp;
+        return this.hp;
     }
+
     @Override
     public void setHp(int hp) {
-        this.hp = Math.max(hp, 0);
+        if (hp < 0) {
+            this.hp = 0;
+        } else {
+            this.hp = hp;
+        }
     }
+
     public Weapon getWeapon() {
-        return weapon;
+        return this.weapon;
     }
+
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }

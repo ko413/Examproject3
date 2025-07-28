@@ -1,17 +1,17 @@
-package src.creature.monster;
+package creature.monster;
 
-import creature.Monster;
 import creature.Creature;
+import creature.Monster;
 
 public final class Slime extends Monster {
     public Slime(char suffix, int hp) {
         super("スライム", suffix, hp);
     }
-    public void attack(Creature target) {
-        System.out.println("スライム" + getSuffix() + "は体当たり攻撃！" + target.getName() + "に5のダメージを与えた！");
-        target.setHp(target.getHp() - 5);
-        if (target.getHp() < 0) {
-            target.setHp(0);
-        }
+
+    @Override
+    public String attack(Creature target) {
+        int damage = 5;
+        target.setHp(target.getHp() - damage);
+        return this.getName() + "は体当たり攻撃！<br>" + target.getName() + "に" + damage + "のダメージを与えた！";
     }
 }
